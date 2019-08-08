@@ -1,0 +1,32 @@
+<head>
+<title></title>
+<meta charset="utf-8">
+<script>
+ var lastTime = new Date().getTime();
+ var currentTime = new Date().getTime();
+ var timeOut = 120 * 1000;
+ window.onload = function() {
+  window.document.onmousemove = function() {
+   astTime = new Date().getTime();
+  }
+ };
+ function testTime() {
+  currentTime = new Date().getTime();
+  if (currentTime - lastTime > timeOut) {
+   top.location.href = '/login';
+  }
+ }
+ window.setInterval(testTime, 1000);
+
+  </script>
+
+<body>
+    <h1>Congratulation，{{ operation }}&nbspScuessfully</h1>
+    <p>Username:{{username}} </p>
+    <p>First Name:{{first_name}}&nbsp&nbsp&nbsp&nbsp&nbspMiddle Name:{{middle_name}}&nbsp&nbsp&nbsp&nbsp&nbspLast Name: {{last_name}}</p>
+    <p>Occupation: {{occupation}}&nbsp&nbsp&nbsp&nbsp&nbspPhone Number:{{phone_number}}&nbsp&nbsp&nbsp&nbsp&nbspEmail:{{email}} </p>
+    <p>Mail Address:{{mail_address}} </p>
+
+    <a href="http://127.0.0.1:8000/login/">Sign Out</a>
+    <a href="http://127.0.0.1:8000/changepassword/{{username}}">Change Password</a>
+</body>
