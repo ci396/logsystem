@@ -1,13 +1,9 @@
-from django.shortcuts import render,redirect
-import hashlib
+from django.shortcuts import render
 from .models import Register
-from django.template import RequestContext
 from .forms import UserLogin,UserRegister,ChangepwdForm
-from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
-import datetime
+from django.contrib.auth import logout as auth_logout
+
 # Create your views here.
 # def take_md5(content):
 #     hash = hashlib.md5()    #创建hash加密实例
@@ -41,7 +37,7 @@ def register(request):
                     password = password1
 
 
-                    user = Register.objects.create_u(username=username,first_name=first_name,middle_name=middle_name,
+                    user = Register.objects.create(username=username,first_name=first_name,middle_name=middle_name,
                                                    last_name=last_name,occupation=occupation,password=password,email=email,
                                                    phone_number=phone_number,mail_address=mail_address)
                     user.save()
@@ -55,7 +51,7 @@ def register(request):
 def login(request):
     if request.method == 'POST':
         form = UserLogin(request.POST)
-        if form.is_valid(): #
+        if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             password = password
@@ -69,7 +65,6 @@ def login(request):
                 email = currentuser.email
                 mail_address = currentuser.mail_address
                 phone_number = currentuser.phone_number
-                form.cleaned_data['password']
                 # request.session['is_login'] = True
                 # request.session['user_id'] = currentuser.id
                 # request.session['user_name'] = currentuser.username
